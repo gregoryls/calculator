@@ -17,3 +17,11 @@ function operate(operator,a,b){
     if (operator === '*') return multiply(a,b);
     if (operator === '/') return divide(a,b);
 }
+display = document.querySelector('.display');
+btnOne = document.querySelector('#one');
+btnOne.addEventListener('click', ()=> {
+    display.textContent = 1;
+})
+
+buttons = Array.from(document.querySelectorAll('.calculator button'));
+console.log(buttons);
