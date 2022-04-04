@@ -25,14 +25,18 @@ const buttonConversion = {one:'1', two:'2', three:'3',four:'4',five:'5',
 
 let buttons = Array.from(document.querySelectorAll('.calculator button'));
 
-for (let i=1;i<(buttons.length)-1;i++){
+for (let i=0;i<(buttons.length);i++){
     let buttonName = buttons[i].id;
     console.log(buttonConversion[buttonName])
     buttons[i].addEventListener('click', ()=>{
         displayContent += `${buttonConversion[buttonName]}`;
         display.textContent = displayContent;
     });
-}
+};
+document.querySelector('#clear').addEventListener('click',()=>{
+    display.textContent = '0';
+})
+
 
 
 
