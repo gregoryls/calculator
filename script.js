@@ -17,11 +17,22 @@ function operate(operator,a,b){
     if (operator === '*') return multiply(a,b);
     if (operator === '/') return divide(a,b);
 }
-display = document.querySelector('.display');
-btnOne = document.querySelector('#one');
-btnOne.addEventListener('click', ()=> {
-    display.textContent = 1;
-})
+let display = document.querySelector('.display');
+let displayContent = '';
+const buttonConversion = {one:'1', two:'2', three:'3',four:'4',five:'5',
+    six:'6',seven:'7',eight:'8',nine:'9',zero:'0',plus:'+',minus:'-',
+    times:'X',divide:'/',dot:'.'};
 
-buttons = Array.from(document.querySelectorAll('.calculator button'));
-console.log(buttons);
+let buttons = Array.from(document.querySelectorAll('.calculator button'));
+
+for (let i=1;i<(buttons.length)-1;i++){
+    let buttonName = buttons[i].id;
+    console.log(buttonConversion[buttonName])
+    buttons[i].addEventListener('click', ()=>{
+        displayContent += `${buttonConversion[buttonName]}`;
+        display.textContent = displayContent;
+    });
+}
+
+
+
