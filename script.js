@@ -19,21 +19,28 @@ function operate(operator,a,b){
 }
 let display = document.querySelector('.display');
 let displayContent = '';
-const buttonConversion = {one:'1', two:'2', three:'3',four:'4',five:'5',
-    six:'6',seven:'7',eight:'8',nine:'9',zero:'0',plus:'+',minus:'-',
-    times:'X',divide:'/',dot:'.'};
+const buttonNumberConversion = {one:'1', two:'2', three:'3',four:'4',five:'5',
+    six:'6',seven:'7',eight:'8',nine:'9',zero:'0',dot:'.'};
+const buttonSymbolConversion = {plus:'+',minus:'-',times:'X',divide:'/'};
 
 let buttons = Array.from(document.querySelectorAll('.calculator button'));
 
 for (let i=0;i<(buttons.length);i++){
     let buttonName = buttons[i].id;
-    console.log(buttonConversion[buttonName])
     buttons[i].addEventListener('click', ()=>{
-        displayContent += `${buttonConversion[buttonName]}`;
+        displayContent += `${buttonNumberConversion[buttonName]}`;
+        if (buttonNumberConversion[buttonName] === undefined){
+            console.log(typeof(displayContent));
+            displayContent = displayContent.substring(0, displayContent.length - 9);
+            displayContent += `${buttonSymbolConversion[buttonName]}`;
+        }
         display.textContent = displayContent;
     });
 };
+
+
 document.querySelector('#clear').addEventListener('click',()=>{
+    displayContent = '';
     display.textContent = '0';
 })
 
