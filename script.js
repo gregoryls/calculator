@@ -70,9 +70,10 @@ document.querySelector('#enter').addEventListener('click',()=>{
 });
 
 
-testButton = document.querySelector('.test');
-testButton.addEventListener('click',()=>{
-    inputSplit();
+backspaceButton = document.querySelector('.test');
+backspaceButton.addEventListener('click',()=>{
+    displayContent = removeEndOfString(displayContent,1);
+    display.textContent = displayContent;
 });
 
 
