@@ -19,7 +19,6 @@ function operate(operator,a,b){
 }
 
 function inputSplit(stringToSplit){
-    const separators = ['\\\+', '-', '\\*', '/'];
     operationNumbers = 
         stringToSplit.split(new RegExp(separators.join('|'),'g'));
     console.log(operationNumbers);
@@ -29,12 +28,24 @@ function removeEndOfString(string,characters){
     string = string.substring(0,string.length - characters);
     return string;
 }
+function roundNumber (num,dec){
+    return Math.round(num*Math.pow(10,dec))/Math.pow(10,dec);
+}
+function calculation(){
+    inputSplit(displayContent);
+    displayContent = 
+        operate(chosenOperator,parseFloat(operationNumbers[0]),parseFloat(operationNumbers[1]));
+    console.log(displayContent);
+    displayContent = roundNumber(displayContent,10);
+    display.textContent = displayContent;
+}
 
 let display = document.querySelector('.display');
 let displayContent = '';
 chosenOperator = '';
 let operationNumbers = [];
 
+const separators = ['\\\+', '-', '\\*', '/'];
 const buttonNumberConversion = {one:'1', two:'2', three:'3',four:'4',five:'5',
     six:'6',seven:'7',eight:'8',nine:'9',zero:'0',dot:'.'};
 const buttonSymbolConversion = {plus:'+',minus:'-',times:'*',divide:'/'};
@@ -47,6 +58,11 @@ for (let i=0;i<(buttons.length);i++){
         displayContent += `${buttonNumberConversion[buttonName]}`;
         if (buttonNumberConversion[buttonName] === undefined){
             if (buttonName === 'enter') return;
+            if (displayContent.includes('+') || displayContent.includes('-') || 
+                displayContent.includes('*') || displayContent.includes('/')){
+                calculation();  
+                
+            }
             displayContent = removeEndOfString(displayContent,9);
             displayContent += `${buttonSymbolConversion[buttonName]}`;
             chosenOperator = buttonSymbolConversion[buttonName];
@@ -55,13 +71,7 @@ for (let i=0;i<(buttons.length);i++){
     });
 };
 
-function calculation(){
-    inputSplit(displayContent);
-    displayContent = 
-        operate(chosenOperator,parseFloat(operationNumbers[0]),parseFloat(operationNumbers[1]));
-    console.log(displayContent);
-    display.textContent = displayContent;
-}
+
 document.querySelector('#clear').addEventListener('click',()=>{
     displayContent = '';
     display.textContent = '0';
