@@ -18,16 +18,22 @@ function operate(operator,a,b){
     if (operator === '/') return divide(a,b);
 }
 
-function inputSplit(){
+function inputSplit(stringToSplit){
     const separators = ['\\\+', '-', '\\*', '/'];
-    let testComponents = 
-        displayContent.split(new RegExp(separators.join('|'),'g'));
-    console.log(testComponents);
+    operationNumbers = 
+        stringToSplit.split(new RegExp(separators.join('|'),'g'));
+    console.log(operationNumbers);
+}
+
+function removeEndOfString(string,characters){
+    string = string.substring(0,string.length - characters);
+    return string;
 }
 
 let display = document.querySelector('.display');
 let displayContent = '';
-let chosenOperator = '';
+chosenOperator = '';
+let operationNumbers = [];
 
 const buttonNumberConversion = {one:'1', two:'2', three:'3',four:'4',five:'5',
     six:'6',seven:'7',eight:'8',nine:'9',zero:'0',dot:'.'};
@@ -40,25 +46,27 @@ for (let i=0;i<(buttons.length);i++){
     buttons[i].addEventListener('click', ()=>{
         displayContent += `${buttonNumberConversion[buttonName]}`;
         if (buttonNumberConversion[buttonName] === undefined){
-            //displayContent = displayContent.substring(0, displayContent.length - 9);
+            if (buttonName === 'enter') return;
             displayContent = removeEndOfString(displayContent,9);
             displayContent += `${buttonSymbolConversion[buttonName]}`;
-            chosenOperator = `${buttonSymbolConversion[buttonName]}`
+            chosenOperator = buttonSymbolConversion[buttonName];
         }
         display.textContent = displayContent;
     });
 };
-function removeEndOfString(string,characters){
-    string = string.substring(0,string.length - characters);
-    return string;
-}
+
 
 document.querySelector('#clear').addEventListener('click',()=>{
     displayContent = '';
     display.textContent = '0';
 })
 document.querySelector('#enter').addEventListener('click',()=>{
-    inputSplit();
+    displayContent = removeEndOfString(displayContent,9);
+    inputSplit(displayContent);
+    displayContent = 
+        operate(chosenOperator,parseFloat(operationNumbers[0]),parseFloat(operationNumbers[1]));
+    console.log(displayContent);
+    display.textContent = displayContent;
 });
 
 
