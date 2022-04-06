@@ -55,18 +55,20 @@ for (let i=0;i<(buttons.length);i++){
     });
 };
 
-
+function calculation(){
+    inputSplit(displayContent);
+    displayContent = 
+        operate(chosenOperator,parseFloat(operationNumbers[0]),parseFloat(operationNumbers[1]));
+    console.log(displayContent);
+    display.textContent = displayContent;
+}
 document.querySelector('#clear').addEventListener('click',()=>{
     displayContent = '';
     display.textContent = '0';
 })
 document.querySelector('#enter').addEventListener('click',()=>{
     displayContent = removeEndOfString(displayContent,9);
-    inputSplit(displayContent);
-    displayContent = 
-        operate(chosenOperator,parseFloat(operationNumbers[0]),parseFloat(operationNumbers[1]));
-    console.log(displayContent);
-    display.textContent = displayContent;
+    calculation();
 });
 
 
