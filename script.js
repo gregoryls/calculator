@@ -100,7 +100,7 @@ document.querySelector('#clear').addEventListener('click',()=>{
     display.textContent = '0';
 })
 document.querySelector('#enter').addEventListener('click',()=>{
-    displayContent = removeEndOfString(displayContent,9);
+    
     calculation();
 });
 
