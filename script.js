@@ -106,10 +106,9 @@ document.querySelector('#enter').addEventListener('click',()=>{
 
 dotButton = document.querySelector('#dot');
 dotButton.addEventListener('click',()=>{
-    if (displayContent.includes('.')){
-        dotButton.disabled = true;
-    }
-    displayContent = removeEndOfString(displayContent,9);
+    // if (displayContent.includes('.')){
+    //     dotButton.disabled = true;
+    // }
     displayContent += '.';
     display.textContent = displayContent;
 });
