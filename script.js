@@ -53,12 +53,21 @@ let operationNumbers = [];
 const separators = ['\\\+', '-', '\\*', '/'];
 const buttonNumberConversion = {one:'1', two:'2', three:'3',four:'4',five:'5',
     six:'6',seven:'7',eight:'8',nine:'9',zero:'0'};
-const buttonSymbolConversion = {plus:'+',minus:'-',times:'*',divide:'/'};
+const buttonOperatorConversion = {plus:'+',minus:'-',times:'*',divide:'/'};
 let numberButtons = Array.from(document.querySelectorAll('.number'));
+let operatorButtons = Array.from(document.querySelectorAll('.operator'));
 for (let i=0;i<(numberButtons.length);i++){
     let buttonName = numberButtons[i].id;
         numberButtons[i].addEventListener('click', ()=>{
             displayContent += `${buttonNumberConversion[buttonName]}`;
+            display.textContent = displayContent;
+});
+}
+
+for (let i=0;i<(operatorButtons.length);i++){
+    let buttonName = operatorButtons[i].id;
+        operatorButtons[i].addEventListener('click', ()=>{
+            displayContent += `${buttonOperatorConversion[buttonName]}`;
             display.textContent = displayContent;
 });
 }
