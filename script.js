@@ -19,6 +19,7 @@ function operate(operator,a,b){
 }
 
 function inputSplit(stringToSplit){
+    stringToSplit = stringToSplit.toString();
     operationNumbers = 
         stringToSplit.split(new RegExp(separators.join('|'),'g'));
     console.log(operationNumbers);
@@ -43,6 +44,7 @@ function calculation(){
         operate(chosenOperator,parseFloat(operationNumbers[0]),parseFloat(operationNumbers[1]));
     console.log(displayContent);
     displayContent = roundNumber(displayContent,10);
+    displayContent = displayContent.toString();
     display.textContent = displayContent;
 }
 
