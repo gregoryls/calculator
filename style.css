@@ -10,6 +10,14 @@ body{
     align-items: flex-end;
     font-size: 40px;
 }
+.back{
+    width: 300px;
+}
+.wrapper{
+    justify-content: center;
+    align-items: space-around;
+    margin-left: auto;
+}
 
 .calculator{
     width: 300px;
@@ -46,4 +54,10 @@ body{
 }
 #dot{
     flex: 1;
+}
+.number, #dot{
+    background-color: lightseagreen;
+}
+.operator, #clear, #enter{
+    background-color: lightcoral;
 }

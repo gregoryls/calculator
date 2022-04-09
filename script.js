@@ -122,7 +122,7 @@ dotButton.addEventListener('click',()=>{
     display.textContent = displayContent;
 });
 
-backspaceButton = document.querySelector('.test');
+backspaceButton = document.querySelector('.back');
 backspaceButton.addEventListener('click',()=>{
     displayContent = removeEndOfString(displayContent,1);
     display.textContent = displayContent;
