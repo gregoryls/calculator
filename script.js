@@ -67,8 +67,16 @@ for (let i=0;i<(numberButtons.length);i++){
 for (let i=0;i<(operatorButtons.length);i++){
     let buttonName = operatorButtons[i].id;
         operatorButtons[i].addEventListener('click', ()=>{
+            inputSplit(displayContent);
+            if ((displayContent.includes('+') || displayContent.includes('-') || 
+                displayContent.includes('*') || displayContent.includes('/'))&&operationNumbers[1]){
+                calculation(); 
+                } 
+            else removeEndOfString(displayContent,2);
             displayContent += `${buttonOperatorConversion[buttonName]}`;
             display.textContent = displayContent;
+            chosenOperator = buttonOperatorConversion[buttonName];
+                      
 });
 }
 // let buttons = Array.from(document.querySelectorAll('.calculator button'));
