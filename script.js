@@ -25,6 +25,7 @@ function inputSplit(stringToSplit){
 }
 
 function removeEndOfString(string,characters){
+    string = string.toString();
     string = string.substring(0,string.length - characters);
     return string;
 }
