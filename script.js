@@ -56,6 +56,10 @@ function checkArrayNumber(num){
     }else return false;
     
 }
+function checkInt (num){
+    num = parseInt(num);
+    if (Number.isInteger(num)) return true;
+}
 
 let display = document.querySelector('.display');
 let displayContent = '';
@@ -88,6 +92,7 @@ for (let i=0;i<(numberButtons.length);i++){
 for (let i=0;i<(operatorButtons.length);i++){
     let buttonName = operatorButtons[i].id;
         operatorButtons[i].addEventListener('click', ()=>{
+            dotButton.disabled = false;
             inputSplit(displayContent);
             if ((displayContent.includes('+') || displayContent.includes('-') || 
                 displayContent.includes('*') || displayContent.includes('/'))){
@@ -100,7 +105,7 @@ for (let i=0;i<(operatorButtons.length);i++){
 });
 }
 
-//TO DO: solve multiple decimals and make hitting enter early do something
+//TO DO: make hitting enter early do something
 //other than give NaN. 
 
 
@@ -129,6 +134,7 @@ for (let i=0;i<(operatorButtons.length);i++){
 
 
 document.querySelector('#clear').addEventListener('click',()=>{
+    dotButton.disabled = false;
     displayContent = '';
     display.textContent = '0';
     chosenOperator = '';
@@ -137,23 +143,26 @@ document.querySelector('#clear').addEventListener('click',()=>{
 document.querySelector('#enter').addEventListener('click',()=>{
     console.log(testArray);
     calculation();
+    console.log(displayContent)
+    if (displayContent.includes('.')) dotButton.disabled = true;
+    if (checkInt(displayContent)) dotButton.disabled = false;
 });
+
 
 dotButton = document.querySelector('#dot');
 dotButton.addEventListener('click',()=>{
-    // if (displayContent.includes('.')){
-    //     dotButton.disabled = true;
-    // }
     displayContent += '.';
     display.textContent = displayContent;
+    dotButton.disabled = true;
 });
 
 backspaceButton = document.querySelector('.back');
 backspaceButton.addEventListener('click',()=>{
+    if (displayContent.charAt(displayContent.length -1) === '.') dotButton.disabled = false;
     displayContent = removeEndOfString(displayContent,1);
     display.textContent = displayContent;
 });
 
 
-console.log(parseFloat(''));
+
 
