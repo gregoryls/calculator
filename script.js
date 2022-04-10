@@ -34,7 +34,7 @@ function roundNumber (num,dec){
     return Math.round(num*Math.pow(10,dec))/Math.pow(10,dec);
 }
 function calculation(){
-    testArray = ['',''];
+    inputNumbers = ['',''];
     inputSplit(displayContent);
     if (operationNumbers[1] === '') return;
     if (operationNumbers[1] == 0 && chosenOperator == '/'){
@@ -65,7 +65,7 @@ let display = document.querySelector('.display');
 let displayContent = '';
 chosenOperator = '';
 let operationNumbers = [];
-let testArray = ['',''];
+let inputNumbers = ['',''];
 
 const separators = ['\\\+', '-', '\\*', '/'];
 const buttonNumberConversion = {one:'1', two:'2', three:'3',four:'4',five:'5',
@@ -78,11 +78,11 @@ for (let i=0;i<(numberButtons.length);i++){
         numberButtons[i].addEventListener('click', ()=>{
             if ((displayContent.includes('+') || displayContent.includes('-') || 
                 displayContent.includes('*') || displayContent.includes('/'))){
-                    testArray[1] += buttonNumberConversion[buttonName];
+                    inputNumbers[1] += buttonNumberConversion[buttonName];
                 }
             if (!((displayContent.includes('+') || displayContent.includes('-') || 
             displayContent.includes('*') || displayContent.includes('/')))){
-                testArray[0] += buttonNumberConversion[buttonName];
+                inputNumbers[0] += buttonNumberConversion[buttonName];
             }
             displayContent += `${buttonNumberConversion[buttonName]}`;
             display.textContent = displayContent;
@@ -138,10 +138,11 @@ document.querySelector('#clear').addEventListener('click',()=>{
     displayContent = '';
     display.textContent = '0';
     chosenOperator = '';
-    testArray = ['',''];
+    inputNumbers = ['',''];
 })
 document.querySelector('#enter').addEventListener('click',()=>{
-    console.log(testArray);
+    if (inputNumbers[1] === '') return;
+    console.log(inputNumbers);
     calculation();
     console.log(displayContent)
     if (displayContent.includes('.')) dotButton.disabled = true;
