@@ -34,7 +34,9 @@ function roundNumber (num,dec){
     return Math.round(num*Math.pow(10,dec))/Math.pow(10,dec);
 }
 function calculation(){
+    testArray = ['',''];
     inputSplit(displayContent);
+    if (operationNumbers[1] === '') return;
     if (operationNumbers[1] == 0 && chosenOperator == '/'){
         displayContent = '$3.50 to unlock divide by zero';
         display.textContent = displayContent;
@@ -47,11 +49,19 @@ function calculation(){
     displayContent = displayContent.toString();
     display.textContent = displayContent;
 }
+function checkArrayNumber(num){
+    num = parseFloat(num);
+    if (typeof(num) === 'number'){
+        return true;
+    }else return false;
+    
+}
 
 let display = document.querySelector('.display');
 let displayContent = '';
 chosenOperator = '';
 let operationNumbers = [];
+let testArray = ['',''];
 
 const separators = ['\\\+', '-', '\\*', '/'];
 const buttonNumberConversion = {one:'1', two:'2', three:'3',four:'4',five:'5',
@@ -62,6 +72,14 @@ let operatorButtons = Array.from(document.querySelectorAll('.operator'));
 for (let i=0;i<(numberButtons.length);i++){
     let buttonName = numberButtons[i].id;
         numberButtons[i].addEventListener('click', ()=>{
+            if ((displayContent.includes('+') || displayContent.includes('-') || 
+                displayContent.includes('*') || displayContent.includes('/'))){
+                    testArray[1] += buttonNumberConversion[buttonName];
+                }
+            if (!((displayContent.includes('+') || displayContent.includes('-') || 
+            displayContent.includes('*') || displayContent.includes('/')))){
+                testArray[0] += buttonNumberConversion[buttonName];
+            }
             displayContent += `${buttonNumberConversion[buttonName]}`;
             display.textContent = displayContent;
 });
@@ -72,16 +90,21 @@ for (let i=0;i<(operatorButtons.length);i++){
         operatorButtons[i].addEventListener('click', ()=>{
             inputSplit(displayContent);
             if ((displayContent.includes('+') || displayContent.includes('-') || 
-                displayContent.includes('*') || displayContent.includes('/'))&&operationNumbers[1]){
+                displayContent.includes('*') || displayContent.includes('/'))){
                 calculation(); 
-                } 
-            else removeEndOfString(displayContent,2);
+                }
+            // else removeEndOfString(displayContent,2);
             displayContent += `${buttonOperatorConversion[buttonName]}`;
             display.textContent = displayContent;
             chosenOperator = buttonOperatorConversion[buttonName];
                       
 });
 }
+
+//TO DO: solve multiple decimals and make hitting enter early do something
+//other than give NaN. 
+
+
 // let buttons = Array.from(document.querySelectorAll('.calculator button'));
 // // Remove undefined logic.  Replace with loops over arrays based on classes 
 // // numbers and operations.  Others will be bespoke as is now.  Split operationNumbers
@@ -109,9 +132,11 @@ for (let i=0;i<(operatorButtons.length);i++){
 document.querySelector('#clear').addEventListener('click',()=>{
     displayContent = '';
     display.textContent = '0';
+    chosenOperator = '';
+    testArray = ['',''];
 })
 document.querySelector('#enter').addEventListener('click',()=>{
-    
+    console.log(testArray);
     calculation();
 });
 
@@ -131,5 +156,5 @@ backspaceButton.addEventListener('click',()=>{
 });
 
 
-
+console.log(parseFloat(''));
 
