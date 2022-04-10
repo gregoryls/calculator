@@ -93,7 +93,6 @@ for (let i=0;i<(operatorButtons.length);i++){
                 displayContent.includes('*') || displayContent.includes('/'))){
                 calculation(); 
                 }
-            // else removeEndOfString(displayContent,2);
             displayContent += `${buttonOperatorConversion[buttonName]}`;
             display.textContent = displayContent;
             chosenOperator = buttonOperatorConversion[buttonName];
