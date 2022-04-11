@@ -57,7 +57,6 @@ function checkArrayNumber(num){
     
 }
 function checkInt (num){
-    num = parseInt(num);
     if (Number.isInteger(num)) return true;
 }
 
@@ -105,32 +104,9 @@ for (let i=0;i<(operatorButtons.length);i++){
 });
 }
 
-//TO DO: make hitting enter early do something
-//other than give NaN. 
+//TO DO: Keyboard link to buttons.
 
 
-// let buttons = Array.from(document.querySelectorAll('.calculator button'));
-// // Remove undefined logic.  Replace with loops over arrays based on classes 
-// // numbers and operations.  Others will be bespoke as is now.  Split operationNumbers
-// //in half by doing it on the operation button --> to check for bad decimals. 
-// for (let i=0;i<(buttons.length);i++){
-//     let buttonName = buttons[i].id;
-//     buttons[i].addEventListener('click', ()=>{
-//         displayContent += `${buttonNumberConversion[buttonName]}`;
-//         if (buttonNumberConversion[buttonName] === undefined){
-//             if (buttonName === 'enter') return;
-//             if (displayContent.includes('+') || displayContent.includes('-') || 
-//                 displayContent.includes('*') || displayContent.includes('/')){
-//                 calculation();  
-                
-//             }
-//             displayContent = removeEndOfString(displayContent,9);
-//             displayContent += `${buttonSymbolConversion[buttonName]}`;
-//             chosenOperator = buttonSymbolConversion[buttonName];
-//         }
-//         display.textContent = displayContent;
-//     });
-// };
 
 
 document.querySelector('#clear').addEventListener('click',()=>{
@@ -164,6 +140,13 @@ backspaceButton.addEventListener('click',()=>{
     display.textContent = displayContent;
 });
 
+// backspaceButton.addEventListener('keydown',(e)=>{
+//     if (e.code === '8'){
+//     if (displayContent.charAt(displayContent.length -1) === '.') dotButton.disabled = false;
+//     displayContent = removeEndOfString(displayContent,1);
+//     display.textContent = displayContent;
+//     }
+// });
 
 
 
